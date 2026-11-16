@@ -17,6 +17,7 @@ struct ScopedRelease
     : std::unique_ptr<std::remove_pointer_t<T>, release_deleter> {
   using base = std::unique_ptr<std::remove_pointer_t<T>, release_deleter>;
   using base::base;
+  operator T() const noexcept { return this->get(); }
 };
 
 template <auto_releasable T> ScopedRelease(T) -> ScopedRelease<T>;
