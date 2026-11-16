@@ -24,6 +24,9 @@ FetchContent_MakeAvailable(metal_cpp)
 
 add_executable(metal_compute src/main.cpp)
 
+target_compile_options(metal_compute PRIVATE
+    $<$<CXX_COMPILER_ID:Clang,AppleClang>:-Wno-c23-extensions>
+)
 
 # 4. Include the downloaded metal-cpp directories
 # ${metal_cpp_SOURCE_DIR} points to the extracted location in your build folder
